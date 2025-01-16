@@ -5,8 +5,26 @@ namespace App\Http\Controllers\V1;
 use App\Models\Profil;
 use Illuminate\Support\Facades\DB;
 
+
 class profilController
 {
+ 
+       /**
+     * @OA\Get(
+     *      path="/api/profiles",
+     *      operationId="getProfileList",
+     *      tags={"Profiles"},
+     *      summary="Get list of profiles where statuses_id = 1 (active)",
+     *      description="Returns list of profiles",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=500, description="Internal Server Error"),
+     *     )
+     *
+     * Returns list of projects
+     */
     public function getAllProfile()
     {
         $datas = DB::table('profils')
