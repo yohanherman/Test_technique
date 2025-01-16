@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\V1;
 
 use App\Models\Profil;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class profilController
 {
-    public function getAllProfil()
+    public function getAllProfile()
     {
         $datas = DB::table('profils')
             ->select('id', 'lastname', 'firstname', 'image', 'created_at', 'updated_at')
@@ -31,6 +30,4 @@ class profilController
         ];
         return response()->json($response, 500);
     }
-
-    public function createProfil() {}
 }

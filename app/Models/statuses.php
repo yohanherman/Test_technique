@@ -13,4 +13,9 @@ class statuses extends Model
         "name",
         "value"
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -123,4 +123,12 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+
+    //     // enregistrement middleware...
+
+    //     'middleware' => [
+    //         \App\Http\Middleware\Administrator::class,
+    //     ],
+
 ];
