@@ -5,8 +5,9 @@ namespace App\Http\Controllers\V1;
 use App\Http\Requests\CreateProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Profil;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 
 class AdminController
 {
@@ -51,7 +52,6 @@ class AdminController
     }
 
 
-
     /**
      * @OA\Get(
      *      path="/api/admin/profiles/{id}",
@@ -91,7 +91,7 @@ class AdminController
             'profile' => $profile,
             'success' => true,
             'status' => 200
-        ], 201);
+        ], 200);
     }
 
 
@@ -128,31 +128,44 @@ class AdminController
      *     ),
      * )
      */
-    public function createProfile(CreateProfileRequest $request)
+    function createProfile(CreateProfileRequest $request)
     {
-        $profile = Profil::create([
-            'lastname' => $request->lastname,
-            'firstname' => $request->firstname,
-            'image' => $request->image,
-            // 'statuses_id' => $request->statuses_id
-        ]);
-        if ($profile) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+
+            // je genere un nom unique pour le fichier
+            $fileName = time() . '-' . uniqid() . '.' . $extension;
+            $path = $file->storeAs('profiles', $fileName, 'public');
+
+            // Création du profil avec l'image
+            $profile = Profil::create([
+                'lastname' => $request->lastname,
+                'firstname' => $request->firstname,
+                'image' => 'profiles/' . $fileName, // Stocker le chemin relatif à 'storage/app/public'
+            ]);
+
             return response()->json([
                 'profile' => $profile,
                 'success' => true,
-                'status' => 200
+                'status' => 201
             ], 201);
         }
+        // Si aucune image n'est envoyée, on crée le profil sans image
+        $profile = Profil::create([
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+        ]);
+
         return response()->json([
             'profile' => $profile,
-            'success' => false,
-            'status' => 501
-        ], 500);
+            'success' => true,
+            'status' => 201
+        ], 201);
     }
 
-
     /**
-     * @OA\Put(
+     * @OA\Post(
      *     path="/api/admin/profiles/{id}",
      *     operationId="updateProfile",
      *     tags={"Profiles"},
@@ -198,20 +211,28 @@ class AdminController
      *   
      * )
      */
-    public function updateProfile(int $id, UpdateProfileRequest $request)
+    public function updateProfile(int $id, Request $request)
     {
         $profile = Profil::find($id);
-        // dd($profile);
 
         if (!$profile) {
             return response()->json([
                 'message' => 'Profile not found.',
             ], 404);
         }
-        $profile->lastname = $request->lastname;
-        $profile->firstname = $request->firstname;
-        $profile->image = $request->image;
-        $profile->statuses_id =  $request->statuses_id;
+        $profile->update($request->except('image'));
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            if ($profile->image && Storage::disk('public')->exists($profile->image)) {
+                Storage::disk('public')->delete($profile->image);
+            }
+
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            //je génére un nom unique pour le fichier
+            $fileName = time() . '-' . uniqid() . '.' . $extension;
+            $path = $file->storeAs('profiles', $fileName, 'public');
+            $profile->image = 'profiles/' . $fileName; // Stocke le chemin relatif à 'storage/app/public'
+        }
         $profile->save();
 
         return response()->json([
