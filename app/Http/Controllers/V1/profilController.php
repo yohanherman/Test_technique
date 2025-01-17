@@ -6,10 +6,25 @@ use App\Models\Profil;
 use Illuminate\Support\Facades\DB;
 
 
+/**
+ * @OA\Schema(
+ *     schema="Profile",
+ *     type="object",
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="lastname", type="string", example="Johane Doe"),
+ *     @OA\Property(property="firstname", type="string", example="johane Doe2"),
+ *     @OA\Property(property="image", type="file", example="johane.jpeg"),
+ *     @OA\Property(property="statuses_id",
+ *                  type="integer", 
+ *                  example="2",
+ *                  description="Foreign key referencing the status in the statuses table (1: active, 2: pending, 3: inactive)"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2025-01-16T12:00:00Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2025-01-16T12:00:00Z")
+ * )
+ */
 class profilController
 {
- 
-       /**
+    /**
      * @OA\Get(
      *      path="/api/profiles",
      *      operationId="getProfileList",

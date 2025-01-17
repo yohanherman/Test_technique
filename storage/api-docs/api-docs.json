@@ -673,6 +673,50 @@
                         "type": "string",
                         "example": "user@example.com"
                     },
+                    "password": {
+                        "type": "string",
+                        "example": "password1234"
+                    },
+                    "roles": {
+                        "type": "string",
+                        "example": "user"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-01-16T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-01-16T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Profile": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "lastname": {
+                        "type": "string",
+                        "example": "Johane Doe"
+                    },
+                    "firstname": {
+                        "type": "string",
+                        "example": "johane Doe2"
+                    },
+                    "image": {
+                        "type": "file",
+                        "example": "johane.jpeg"
+                    },
+                    "statuses_id": {
+                        "description": "Foreign key referencing the status in the statuses table (1: active, 2: pending, 3: inactive)",
+                        "type": "integer",
+                        "example": "2"
+                    },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",

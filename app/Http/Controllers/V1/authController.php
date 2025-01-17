@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="name", type="string", example="John Doe"),
  *     @OA\Property(property="email", type="string", example="user@example.com"),
+ *     @OA\Property(property="password", type="string", example="password1234"),
+ *     @OA\Property(property="roles", type="string", example="user"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2025-01-16T12:00:00Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2025-01-16T12:00:00Z")
  * )
@@ -79,7 +81,7 @@ class AuthController extends Controller
             $response = [
                 'user' => $user,
                 'success' => true,
-                'status' => 200
+                'status' => 201
             ];
             return response()->json($response, 201);
         }
