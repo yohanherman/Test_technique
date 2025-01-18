@@ -56,11 +56,6 @@
                                     "firstname": {
                                         "type": "string",
                                         "example": "doe"
-                                    },
-                                    "image": {
-                                        "type": "string",
-                                        "example": "profile.jpg",
-                                        "nullable": true
                                     }
                                 },
                                 "type": "object"

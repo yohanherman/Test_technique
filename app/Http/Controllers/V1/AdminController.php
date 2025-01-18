@@ -115,7 +115,6 @@ class AdminController
      *             required={"lastname", "firstname"},
      *             @OA\Property(property="lastname", type="string", example="john"),
      *             @OA\Property(property="firstname", type="string", example="doe"),
-     *             @OA\Property(property="image", type="string", nullable=true, example="profile.jpg"),
      *         )
      *     ),
      *     @OA\Response(
