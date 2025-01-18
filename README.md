@@ -14,7 +14,7 @@ Cette API permet de gérer des profils en offrant un CRUD complet pour l'entité
   
 - Accès à la documentation complète de l'API pour voir et tester les différents endpoints directement depuis le navigateur via Swagger.  
   
-> **Note importante** : Pour le Update et la Creation de Profil, vous ne pourrez pas ajouter l'image depuis swagger, pour tester correctement ces deux routes en insérerant les images, utilisez un outil comme **postman** ou autre qui permet d'envoyer les données sous forme de paire clé-valeur, les routes restent fonctionnelles car l'image est optionnelle lors de la creation ou le update.
+> **Note importante** : Pour le Update et la Creation de Profil, vous ne pourrez pas ajouter l'image depuis swagger, pour tester correctement ces deux routes en insérerant les images, utilisez un outil comme **postman** ou autre qui permet d'envoyer les données sous forme de paire clé-valeur,mais les routes restent fonctionnelles car l'image est optionnelle lors de la creation ou le update.
 
   
 ## Technologies utilisées
@@ -36,23 +36,66 @@ Cette API permet de gérer des profils en offrant un CRUD complet pour l'entité
 
 - Laravel installé localement
 
-## Preview
-
 ## Installation
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 1 - Cloner le projet
+git clone <URL_DU_REPO>
+
+### 2 -  Entrer dans le répertoire cloné si necessaire
+cd Repertoire
+
+### 3 - Installer les dépendances
+composer install
+
+### 4 - Configurer l'environnement de développement et de testing
+cp .env.example .env  
+cp .env.example .env.testing
+
+DB_CONNECTION=mysql   
+DB_HOST=127.0.0.1  
+DB_PORT=3306  
+DB_DATABASE=nom_de_votre_base  
+DB_USERNAME=nom_utilisateur  
+DB_PASSWORD=mot_de_passe  
+
+APP_ENV=testing  
+DB_CONNECTION=mysql  
+DB_HOST=127.0.0.1  
+DB_PORT=3306  
+DB_DATABASE=nom_de_votre_base  
+DB_USERNAME=nom_utilisateur  
+DB_PASSWORD=mot_de_passe  
+
+### 5 -  Générer la clé d'application
+php artisan key:generate
+
+
+### 6 - Génerer la clé secrète JWT
+php artisan jwt:secret
+
+> **Note importante** :la clé sera ajoutée dans .env, copier cette clé et ajouter la dans le .env.testing également.
+
+### 7 - Exécuter les migrations
+
+php artisan migrate  
+php artisan migrate --env=testing , pour l'environnement de test
+
+### 8 - Démarrer le serveur
+php artisan serve
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Contributing
 
