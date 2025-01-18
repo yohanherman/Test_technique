@@ -12,6 +12,12 @@ class AuthFunctionnalTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        // config  initiale de mon env avant le test
+        parent::setUp();
+    }
+
     public function test_admin_receives_token_on_longin_and_can_access_protected_route()
     {
         $user = User::factory()->create([
@@ -44,7 +50,8 @@ class AuthFunctionnalTest extends TestCase
 
         $protectedResponse->assertStatus(200)
             ->assertJson([
-                'success' => 'true',
+                'success' => true,
+                'status' => 200
             ]);
     }
 
@@ -103,16 +110,16 @@ class AuthFunctionnalTest extends TestCase
             ->postJson('/api/admin/auth/refresh');
 
         $response->assertStatus(200)
-        ->assertJsonStructure([
-            'authorization' => [
-                'token',
-                'type',
-                'expires_in'
-            ],
-            'user',
-            'status',
-            'message'
-        
-        ]);
+            ->assertJsonStructure([
+                'authorization' => [
+                    'token',
+                    'type',
+                    'expires_in'
+                ],
+                'user',
+                'status',
+                'message'
+
+            ]);
     }
 }

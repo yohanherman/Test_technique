@@ -48,13 +48,19 @@ class profilController
             ->get();
         // dd($datas);
 
-        if (isset($datas) && !empty($datas)) {
+        if (isset($datas) && $datas->isNotEmpty()) {
             $response = [
                 'datas' => $datas,
                 'success' => true,
                 'status' => 200
             ];
             return response()->json($response, 200);
+        } elseif ($datas->isEmpty()) {
+            return response()->json([
+                'datas' => [],
+                'success' => true,
+                'status' => 200
+            ]);
         }
         $response = [
             'datas' => $datas,

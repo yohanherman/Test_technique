@@ -5,7 +5,6 @@ namespace App\Http\Controllers\V1;
 use App\Http\Requests\CreateProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Profil;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,15 +36,20 @@ class AdminController
             ->join('statuses', 'statuses.id', '=', 'profils.statuses_id')
             ->get();
         // dd($datas);
-        if ($datas && !empty($datas)) {
+        if ($datas && $datas->isNotEmpty()) {
             return response()->json([
-                '$datas' => $datas,
+                'datas' => $datas,
                 'success' => true,
                 'status' => 200
             ], 200);
+        } elseif ($datas->isEmpty()) {
+            return response()->json([
+                'datas' => [],
+                'success' => 'success',
+                'status' => 200
+            ]);
         }
         return response()->json([
-            '$datas' => $datas,
             'success' => false,
             'status' => 501
         ], 500);
@@ -138,7 +142,6 @@ class AdminController
             $fileName = time() . '-' . uniqid() . '.' . $extension;
             $path = $file->storeAs('profiles', $fileName, 'public');
 
-            // Création du profil avec l'image
             $profile = Profil::create([
                 'lastname' => $request->lastname,
                 'firstname' => $request->firstname,
@@ -148,7 +151,8 @@ class AdminController
             return response()->json([
                 'profile' => $profile,
                 'success' => true,
-                'status' => 201
+                'status' => 201,
+                "message" => "profile successfully created"
             ], 201);
         }
         // Si aucune image n'est envoyée, on crée le profil sans image
@@ -211,7 +215,7 @@ class AdminController
      *   
      * )
      */
-    public function updateProfile(int $id, Request $request)
+    public function updateProfile(int $id, UpdateProfileRequest $request)
     {
         $profile = Profil::find($id);
 
@@ -228,6 +232,7 @@ class AdminController
 
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
+
             //je génére un nom unique pour le fichier
             $fileName = time() . '-' . uniqid() . '.' . $extension;
             $path = $file->storeAs('profiles', $fileName, 'public');
@@ -238,7 +243,8 @@ class AdminController
         return response()->json([
             'profile' => $profile,
             'success' => true,
-            'status' => 200
+            'status' => 200,
+            "message" => "profile successfully updated"
         ], 200);
     }
 
@@ -262,7 +268,7 @@ class AdminController
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
-     *         response=204,
+     *         response=200,
      *         description="Profile successfully deleted"
      *     ),
      *     @OA\Response(
@@ -291,6 +297,6 @@ class AdminController
             'success' => true,
             'status' => 200,
             'message' => "profil successfully deleted"
-        ], 204);
+        ], 200);
     }
 }

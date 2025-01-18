@@ -9,13 +9,20 @@ class statuses extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;  // Désactive les timestamps
+
     protected $fillable = [
         "name",
         "value"
     ];
 
-    public function users()
+    // public function users()
+    // {
+    //     return $this->hasMany(User::class);
+    // }
+
+    public function profil()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(profil::class);
     }
 }
