@@ -11,15 +11,34 @@ Cette API permet de gérer des profils en offrant un CRUD complet pour l'entité
 - Route publique : Liste tous les profils actifs (status = 1).
 
 - Restriction d'accès : Les profils inactifs (status ≠ 1) sont uniquement accessibles par un administrateur authentifié.
+  
+- Accès à la documentation complète de l'API pour voir et tester les différents endpoints directement depuis le navigateur via Swagger.  
+  
+> **Note importante** : Pour le Update et la Creation de Profil, vous ne pourrez pas ajouter l'image depuis swagger, pour tester correctement ces deux routes en insérerant les images, utilisez un outil comme **postman** ou autre qui permet d'envoyer les données sous forme de paire clé-valeur, les routes restent fonctionnelles car l'image est optionnelle lors de la creation ou le update.
 
+  
 ## Technologies utilisées
 
--  Framework : Laravel 11
--  Base de données : MySQL
--  Versionning : Git et GitHub
--  Environnement local : Laragon
+-  **Framework** : Laravel 11
+-  **Base de données** : MySQL
+-  **Versionning** : Git et GitHub
+-  **Environnement local** : Laragon
 
-### Premium Partners
+## Prérequis
+
+- PHP >= 8.3
+
+- Composer
+
+- MySQL
+
+- Git
+
+- Laravel installé localement
+
+## Preview
+
+## Installation
 
 - **[Vehikl](https://vehikl.com/)**
 - **[Tighten Co.](https://tighten.co)**
@@ -45,21 +64,3 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-
-Versionning : Git et GitHub
-
-Prérequis
-
-PHP >= 8.3
-
-Composer
-
-MySQL
-
-Git
-
-Laravel installé localement
