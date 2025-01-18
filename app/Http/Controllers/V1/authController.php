@@ -223,7 +223,6 @@ class AuthController extends Controller
 
 
 
-
     /**
      * @OA\Post(
      *     path="/api/admin/auth/refresh", 
@@ -264,7 +263,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'user' => Auth::user(),
-            'authorisation' => [
+            'authorization' => [
                 'token' => $newToken,
                 'type' => 'bearer',
                 'expires_in' => Auth::factory()->getTTL() * 60

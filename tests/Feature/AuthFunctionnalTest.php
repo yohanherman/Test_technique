@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class AuthFunctionnalTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_receives_token_and_can_access_protected_route()
+    public function test_admin_receives_token_on_longin_and_can_access_protected_route()
     {
         $user = User::factory()->create([
             'email' => 'test@example.com',
@@ -35,14 +36,12 @@ class AuthFunctionnalTest extends TestCase
                 'success',
             ]);
 
-        // je récupere le token de la réponse
         $token = $response->json('authorization.token');
 
         // je use le token pour accéder à une route protégée
         $protectedResponse = $this->withHeader('Authorization', 'Bearer ' . $token)
             ->getJson('/api/admin/profiles');
 
-        // je check que l'utilisateur a accès
         $protectedResponse->assertStatus(200)
             ->assertJson([
                 'success' => 'true',
@@ -63,7 +62,7 @@ class AuthFunctionnalTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'email' => 'johndoe@example.com',
-            'roles' => 'admin',  
+            'roles' => 'admin',
         ]);
 
         $response->assertJson([
@@ -73,6 +72,47 @@ class AuthFunctionnalTest extends TestCase
             ],
             'status' => 201,
             'success' => true,
+        ]);
+    }
+
+    public function test_admin_can_logout()
+    {
+        $user = User::factory()->create();
+        $token = Auth::login($user);
+
+        $response = $this->withHeader('Authorization', 'Bearer' . $token)
+            ->postJson('/api/admin/auth/logout');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'status' => '200',
+                'success' => true,
+                'message' => 'Successfully logged out'
+            ]);
+
+        // je check que l'utilisateur est déconnecté
+        $this->assertNull(Auth::user());
+    }
+
+    public function test_admin_can_refresh_token()
+    {
+        $user = User::factory()->create();
+        $token = Auth::login($user);
+
+        $response = $this->withHeader('Authorization', 'Bearer' . $token)
+            ->postJson('/api/admin/auth/refresh');
+
+        $response->assertStatus(200)
+        ->assertJsonStructure([
+            'authorization' => [
+                'token',
+                'type',
+                'expires_in'
+            ],
+            'user',
+            'status',
+            'message'
+        
         ]);
     }
 }
