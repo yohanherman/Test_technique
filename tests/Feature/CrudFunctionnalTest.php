@@ -3,13 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Profil;
-use App\Models\statuses;
 use App\Models\User;
-use Database\Seeders\StatusSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+
 use Tests\TestCase;
 
 class CrudFunctionnalTest extends TestCase

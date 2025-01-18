@@ -196,7 +196,7 @@ class AdminController
      *                 property="statuses_id",
      *                 type="integer",
      *                 enum={1, 2, 3},
-     *                 description="Required status, must be 1 (active), 2 (pending), or 3 (inactive)"
+     *                 description="Required status, must be 1 (active), 2 (inactive), or 3 (pending)"
      *             )
      *         )
      *     ),

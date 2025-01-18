@@ -165,7 +165,7 @@
                                         "nullable": true
                                     },
                                     "statuses_id": {
-                                        "description": "Required status, must be 1 (active), 2 (pending), or 3 (inactive)",
+                                        "description": "Required status, must be 1 (active), 2 (inactive), or 3 (pending)",
                                         "type": "integer",
                                         "enum": [
                                             1,
@@ -215,7 +215,7 @@
                     }
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Profile successfully deleted"
                     },
                     "404": {
