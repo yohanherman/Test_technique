@@ -8,9 +8,11 @@ Cette API permet de gérer des profils en offrant un CRUD complet pour l'entité
 
 - CRUD complet pour sur l'entité profils : Créer, lire, mettre à jour et supprimer des profils, par un administrateur authentifié.
 
+- Authentification des administrateurs: Login, register, refresh token , logout . 
+
 - Route publique : Liste tous les profils actifs (status = 1).
 
-- Restriction d'accès : Les profils inactifs (status ≠ 1) sont uniquement accessibles par un administrateur authentifié.
+- Restriction d'accès : Les profils inactifs (status = 2 ) et en attente (status = 3) sont uniquement accessibles par un administrateur authentifié.
   
 - Accès à la documentation complète de l'API pour voir et tester les différents endpoints directement depuis le navigateur via Swagger.  
   
@@ -80,16 +82,20 @@ php artisan jwt:secret
 php artisan migrate  
 php artisan migrate --env=testing , pour l'environnement de test
 
-### 8 - Peupler la base de données à l'aide des seeders et des factories.
+### 8 - Peupler la base de données à l'aide des seeders et des factories
 php artisan db:seed
 
-Peupler la base de données à l'aide des seeders et des factories.
+### 9 - Lancer les tests
+php artisan test
 
-### 9 - Démarrer le serveur
-php artisan serve
+### 10 - Démarrer le serveur
+php artisan serve de développement 
 
-### 10- aller sur postman ou autres outils pour tester l'API
-http://127.0.0.1:8000/api/*** ou dans le navigateur http://127.0.0.1:8000/api/documentation
+### 11- Aller sur postman ou autres outils pour tester l'API
+http://127.0.0.1:8000/api/chemin/vers/ressource
+
+### 12 - Pour tester les routes dans le navigateur
+http://127.0.0.1:8000/api/documentation
 
 
 
