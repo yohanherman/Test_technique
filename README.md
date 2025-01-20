@@ -38,6 +38,9 @@ Cette API permet de gérer des profils en offrant un CRUD complet pour l'entité
 
 - Laravel installé localement
 
+![image_alt](https://github.com/yohanherman/Test_technique/blob/189f00bf19d4a819cfff26618608d827f89efa89/Capture%20d'%C3%A9cran%202025-01-18%20202338.png)
+
+
 ## Installation
 
 ### 1 - Cloner le projet
