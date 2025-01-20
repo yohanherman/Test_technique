@@ -150,7 +150,7 @@ class CrudFunctionnalTest extends TestCase
     }
 
 
-    public function test_admin_can_get_all_profiles_with_status_1()
+    public function test_get_all_profiles_with_status_1()
     {
         $response = $this->getJson('/api/profiles');
 
