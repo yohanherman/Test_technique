@@ -80,30 +80,16 @@ php artisan jwt:secret
 php artisan migrate  
 php artisan migrate --env=testing , pour l'environnement de test
 
-### 8 - Démarrer le serveur
+### 8 - Peupler la base de données à l'aide des seeders et des factories.
+php artisan db:seed
+
+Peupler la base de données à l'aide des seeders et des factories.
+
+### 9 - Démarrer le serveur
 php artisan serve
 
+### 10- aller sur postman ou autres outils pour tester l'API
+http://127.0.0.1:8000/api/*** ou dans le navigateur http://127.0.0.1:8000/api/documentation
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
 
