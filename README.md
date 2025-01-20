@@ -23,6 +23,9 @@ Cette API permet de gérer des profils en offrant un CRUD complet pour l'entité
 
 ![image_alt](https://github.com/yohanherman/Test_technique/blob/189f00bf19d4a819cfff26618608d827f89efa89/Capture%20d'%C3%A9cran%202025-01-18%20202338.png)
 
+
+![image alt](https://github.com/yohanherman/Test_technique/blob/26127881b6b56b07dd1e1c96b2f1ea56799a9bf8/Capture%20d'%C3%A9cran%202025-01-18%20223650.png)
+
   
 ## Technologies utilisées
 
