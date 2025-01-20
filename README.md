@@ -88,8 +88,8 @@ php artisan db:seed
 ### 9 - Lancer les tests
 php artisan test
 
-### 10 - Démarrer le serveur
-php artisan serve de développement 
+### 10 - Démarrer le serveur de développement 
+php artisan serve
 
 ### 11- Aller sur postman ou autres outils pour tester l'API
 http://127.0.0.1:8000/api/chemin/vers/ressource
